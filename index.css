@@ -1,0 +1,341 @@
+ /* Reset & Base */
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: Arial, sans-serif;
+     background: linear-gradient(135deg, #0b0d17 0%, #1f1c2c 100%);
+     color: #e0e0e0;
+ }
+
+ a {
+     color: inherit;
+     text-decoration: none;
+ }
+
+ ul {
+     list-style: none;
+ }
+
+ .container {
+     width: 90%;
+     max-width: 1200px;
+     margin: 0 auto;
+ }
+
+ .btn {
+     display: inline-block;
+     padding: 10px 20px;
+     border-radius: 5px;
+     cursor: pointer;
+ }
+
+ /* Navigation */
+ nav {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 20px 0;
+ }
+
+ nav .logo {
+     width: 120px;
+     height: 40px;
+     background: #2e213b;
+     /* placeholder */
+     border: 1px solid #5d3fd3;
+ }
+
+ nav ul {
+     display: flex;
+     gap: 20px;
+ }
+
+ nav li {
+     font-size: 0.9rem;
+ }
+
+ nav .login {
+     border: 1px solid #5d3fd3;
+     padding: 8px 16px;
+     border-radius: 5px;
+     background: rgba(93, 63, 211, 0.2);
+     transition: background .3s;
+ }
+
+ nav .login:hover {
+     background: rgba(93, 63, 211, 0.4);
+ }
+
+ /* Hero */
+ .hero {
+     display: flex;
+     align-items: center;
+     padding: 80px 0;
+ }
+
+ .hero .left,
+ .hero .right {
+     flex: 1;
+ }
+
+ .hero .left .placeholder-image {
+     width: 100%;
+     height: 200px;
+     background: #1f1c2c;
+     /* placeholder for art */
+     border: 2px dashed #5d3fd3;
+ }
+
+ .hero h1 {
+     font-size: 2.5rem;
+     color: #bf40bf;
+     margin-bottom: 20px;
+ }
+
+ .hero p {
+     font-size: 1rem;
+     margin-bottom: 30px;
+     color: #bbb;
+ }
+
+ .signup-form {
+     background: rgba(30, 25, 45, 0.9);
+     padding: 30px;
+     border-radius: 10px;
+     border: 1px solid #5d3fd3;
+ }
+
+ .signup-form h2 {
+     color: #7f00ff;
+     margin-bottom: 20px;
+ }
+
+ .signup-form label {
+     font-size: 0.75rem;
+     color: #bbb;
+ }
+
+ .signup-form input {
+     width: 100%;
+     padding: 10px;
+     margin-bottom: 15px;
+     border: 1px solid #5d3fd3;
+     border-radius: 5px;
+     background: #1f1c2c;
+     color: #e0e0e0;
+ }
+
+ .signup-form input::placeholder {
+     color: #555;
+ }
+
+ .signup-form .btn-primary {
+     background: #00bfff;
+     color: #1f1c2c;
+     width: 100%;
+     text-align: center;
+     border: none;
+     transition: box-shadow .3s;
+     box-shadow: 0 0 10px #00bfff;
+ }
+
+ .signup-form .btn-primary:hover {
+     box-shadow: 0 0 20px #00bfff;
+ }
+
+ .signup-form .or {
+     text-align: center;
+     margin: 15px 0;
+     color: #777;
+ }
+
+ .signup-form .btn-social {
+     width: 100%;
+     border: 1px solid #5d3fd3;
+     margin-bottom: 10px;
+     background: transparent;
+     color: #bbb;
+     transition: background .3s;
+ }
+
+ .signup-form .btn-social:hover {
+     background: rgba(93, 63, 211, 0.3);
+ }
+
+ /* Section Titles */
+ .section {
+     padding: 60px 0;
+ }
+
+ .section h2 {
+     text-align: center;
+     margin-bottom: 20px;
+     font-size: 2rem;
+     color: #00bfff;
+     text-shadow: 0 0 5px #00bfff;
+ }
+
+ /* Gamify Your Life */
+ .features {
+     text-align: center;
+ }
+
+ .features .placeholder-graphic {
+     width: 200px;
+     height: 120px;
+     background: #1f1c2c;
+     margin: 20px auto;
+     border: 2px dashed #00bfff;
+ }
+
+ .features p {
+     color: #ccc;
+ }
+
+ .features .grid {
+     display: flex;
+     gap: 20px;
+     flex-wrap: wrap;
+     justify-content: center;
+     margin-top: 30px;
+ }
+
+ .feature {
+     flex: 1;
+     min-width: 200px;
+ }
+
+ .feature .placeholder-icon {
+     width: 60px;
+     height: 60px;
+     background: #1f1c2c;
+     margin: 0 auto 10px;
+     border: 1px solid #00bfff;
+     border-radius: 50%;
+ }
+
+ .feature h3 {
+     margin-bottom: 10px;
+     color: #bf40bf;
+ }
+
+ .feature p {
+     font-size: 0.9rem;
+     color: #ccc;
+ }
+
+ /* Players Use Habitica */
+ .users .grid {
+     display: flex;
+     gap: 20px;
+     flex-wrap: wrap;
+     justify-content: center;
+ }
+
+ .user {
+     flex: 1;
+     min-width: 200px;
+     text-align: center;
+ }
+
+ .user .placeholder-avatar {
+     width: 80px;
+     height: 80px;
+     background: #1f1c2c;
+     border: 2px solid #00bfff;
+     border-radius: 50%;
+     margin: 0 auto 10px;
+ }
+
+ .user h3 {
+     color: #bf40bf;
+ }
+
+ .user p {
+     color: #ccc;
+ }
+
+ /* Level Up Anywhere */
+ .mobile {
+     display: flex;
+     align-items: center;
+     gap: 40px;
+     justify-content: center;
+ }
+
+ .mobile .placeholder-device {
+     width: 150px;
+     height: 300px;
+     background: #1f1c2c;
+     border: 2px dashed #00bfff;
+ }
+
+ .mobile .apps h2 {
+     color: #00bfff;
+ }
+
+ .mobile .apps p {
+     color: #ccc;
+ }
+
+ .app-buttons .btn {
+     border: 1px solid #00bfff;
+     background: transparent;
+     color: #00bfff;
+     padding: 8px 12px;
+     transition: background .3s;
+ }
+
+ .app-buttons .btn:hover {
+     background: rgba(0, 191, 255, 0.3);
+ }
+
+ /* Call to Action */
+ .cta {
+     text-align: center;
+     padding: 40px 0;
+ }
+
+ .cta .btn-join {
+     background: #bf40bf;
+     color: #1f1c2c;
+     padding: 15px 30px;
+     font-size: 1rem;
+     box-shadow: 0 0 10px #bf40bf;
+     transition: box-shadow .3s;
+ }
+
+ .cta .btn-join:hover {
+     box-shadow: 0 0 20px #bf40bf;
+ }
+
+ /* Social & Footer */
+ footer {
+     background: #1f1c2c;
+     padding: 20px 0;
+     font-size: 0.8rem;
+     color: #888;
+ }
+
+ footer .placeholder-logo {
+     width: 100px;
+     height: 30px;
+     background: #2e213b;
+     border: 1px solid #5d3fd3;
+     margin: 0 auto 10px;
+ }
+
+ footer nav {
+     display: flex;
+     justify-content: center;
+     gap: 30px;
+     flex-wrap: wrap;
+ }
+
+ footer p {
+     color: #666;
+ }

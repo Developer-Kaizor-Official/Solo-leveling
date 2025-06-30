@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Leveling System</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header class="container">
+        <nav>
+            <div class="logo"></div>
+            <ul>
+                <li>Get Started</li>
+                <li>Mobile Apps</li>
+                <li>Learn More ▼</li>
+            </ul>
+            <div class="btn login">Login</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <div class="left">
+            <div class="placeholder-image"></div>
+        </div>
+        <div class="right">
+            <div class="signup-form">
+                <h2>Sign Up For Free</h2>
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter a password">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                <button id="signUpBtn" class="btn btn-primary">Sign Up</button>
+                <div class="or">OR</div>
+                <button id="googleSignInBtn" class="btn btn-social">Sign up with Google</button>
+               
+                <div id="errorMsg" style="color: #ff4d4d; margin-top:10px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gamify Your Life -->
+    <section class="section features">
+        <div class="container">
+            <h2>Gamify Your Life</h2>
+            <div class="placeholder-graphic"></div>
+            <p>Habitica is a free habit-building and productivity app that treats your real life like a game.</p>
+            <div class="grid">
+                <div class="feature">
+                    <div class="placeholder-icon"></div>
+                    <h3>Track Your Habits</h3>
+                    <p>Stay accountable by tracking and managing your Habits, Dailies, and To-Dos.</p>
+                </div>
+                <div class="feature">
+                    <div class="placeholder-icon"></div>
+                    <h3>Earn Rewards</h3>
+                    <p>Check off tasks to level up and unlock in-game features and rewards.</p>
+                </div>
+                <div class="feature">
+                    <div class="placeholder-icon"></div>
+                    <h3>Battle Monsters</h3>
+                    <p>Fight monsters with friends and earn gold for custom rewards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Players Use Habitica -->
+    <section class="section users container">
+        <h2>Players Use Habitica to Improve</h2>
+        <div class="grid">
+            <div class="user">
+                <div class="placeholder-avatar"></div>
+                <h3>Health and Fitness</h3>
+                <p>Never motivated to floss? Habitica makes it fun to get healthy.</p>
+            </div>
+            <div class="user">
+                <div class="placeholder-avatar"></div>
+                <h3>School and Work</h3>
+                <p>Easy to keep track of your progress as you tackle your toughest tasks.</p>
+            </div>
+            <div class="user">
+                <div class="placeholder-avatar"></div>
+                <h3>And much more!</h3>
+                <p>Customize Habitica to your personal goals and creative projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Level Up Anywhere -->
+    <section class="section mobile">
+        <div class="placeholder-device"></div>
+        <div class="apps">
+            <h2>Level Up Anywhere</h2>
+            <p>Our mobile apps make it simple to keep track of your tasks on-the-go.</p>
+            <div class="app-buttons">
+                <div class="btn">Google Play</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="btn btn-join">Join Habitica Today</div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="placeholder-logo"></div>
+        <nav>
+            <div>Product</div>
+            <div>Company</div>
+            <div>Community</div>
+            <div>Support</div>
+            <div>Developers</div>
+        </nav>
+        <p>&copy; 2025 solo-leveling-system. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4C8QQlLGpWpORqCbDuy1xVJGi3JVM-S8",
+            authDomain: "solo-leveling-system-a2c14.firebaseapp.com",
+            projectId: "solo-leveling-system-a2c14",
+            storageBucket: "solo-leveling-system-a2c14.appspot.com",
+            messagingSenderId: "688962214155",
+            appId: "1:688962214155:web:b993ca3c3fb74e05532a0e"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        // Elements
+        const signUpBtn = document.getElementById('signUpBtn');
+        const googleSignInBtn = document.getElementById('googleSignInBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Email & Password Sign Up
+        signUpBtn.addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const username = document.getElementById('username').value;
+            errorMsg.textContent = '';
+            if (!email || !password || !confirmPassword || !username) {
+                errorMsg.textContent = 'All fields are required.';
+                return;
+            }
+            if (password !== confirmPassword) {
+                errorMsg.textContent = 'Passwords do not match.';
+                return;
+            }
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    // Optionally set displayName
+                    user.updateProfile({ displayName: username });
+                    alert(`Welcome, ${username}! Your account has been created.`);
+                })
+                .catch((error) => {
+                    errorMsg.textContent = error.message;
+                });
+        });
+
+        // Google Sign-In
+        googleSignInBtn.addEventListener('click', () => {
+            signInWithPopup(auth, googleProvider)
+                .then((result) => {
+                    const user = result.user;
+                    alert(`Welcome, ${user.displayName}! Signed in with Google.`);
+                })
+                .catch((error) => {
+                    errorMsg.textContent = error.message;
+                });
+        });
+
+        // Apple Sign-In placeholder
+        document.getElementById('appleSignInBtn').addEventListener('click', () => {
+            alert('Apple Sign-In not implemented.');
+        });
+    </script>
+</body>
+
+</html>
