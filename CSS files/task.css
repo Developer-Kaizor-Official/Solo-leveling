@@ -1,0 +1,121 @@
+ /* Solo Leveling - Neon Purple & Blue Theme */
+ :root {
+     --bg-dark: #1a002a;
+     /* deep dark purple */
+     --bg-panel: #2b0044;
+     /* dark violet panel */
+     --accent-blue: #00d9ff;
+     /* glowing neon blue */
+     --accent-violet: #8a2be2;
+     /* bright violet */
+     --text-light: #e0e0ff;
+     /* pale blue-white */
+     --text-muted: #a398c7;
+     /* muted lavender */
+     --border: #3b003f;
+     /* dark panel border */
+     --shadow: rgba(0, 217, 255, 0.2);
+     /* neon blue glow shadow */
+ }
+
+ body {
+     margin: 0;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     background: var(--bg-dark) url('https://example.com/solo-neon-bg.jpg') center/cover no-repeat;
+     color: var(--text-light);
+ }
+
+ header {
+     background: linear-gradient(135deg, #2b0044 0%, #1a002a 100%);
+     padding: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     box-shadow: 0 2px 8px var(--shadow);
+ }
+
+ .logo {
+     font-size: 1.5rem;
+     color: var(--accent-blue);
+     font-weight: bold;
+     text-shadow: 0 0 8px var(--accent-blue);
+ }
+
+ nav a {
+     margin: 0 10px;
+     color: var(--text-muted);
+     text-decoration: none;
+ }
+
+ nav a:hover {
+     color: var(--accent-violet);
+     text-shadow: 0 0 4px var(--accent-violet);
+ }
+
+ .profile {
+     display: flex;
+     align-items: center;
+ }
+
+ .profile img {
+     width: 40px;
+     height: 40px;
+     border-radius: 50%;
+     border: 2px solid var(--accent-blue);
+     box-shadow: 0 0 6px var(--accent-blue);
+     margin-right: 10px;
+ }
+
+ main {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     gap: 20px;
+     padding: 20px;
+ }
+
+ .panel {
+     background: var(--bg-panel);
+     border: 1px solid var(--border);
+     border-radius: 8px;
+     padding: 15px;
+     box-shadow: 0 1px 4px var(--shadow);
+ }
+
+ .panel h2 {
+     margin-top: 0;
+     color: var(--accent-violet);
+     text-shadow: 0 0 6px var(--accent-violet);
+ }
+
+ .task,
+ .inventory-item {
+     background: #330055;
+     border-radius: 4px;
+     padding: 8px;
+     margin-bottom: 8px;
+     display: flex;
+     justify-content: space-between;
+     box-shadow: 0 0 4px var(--shadow);
+ }
+
+ .btn {
+     background: var(--accent-blue);
+     color: var(--text-light);
+     border: none;
+     padding: 8px 12px;
+     border-radius: 4px;
+     cursor: pointer;
+     box-shadow: 0 0 6px var(--accent-blue);
+ }
+
+ .btn:hover {
+     background: #00b8d1;
+     box-shadow: 0 0 8px var(--accent-blue);
+ }
+
+ footer {
+     text-align: center;
+     padding: 10px;
+     font-size: 0.8rem;
+     color: var(--text-muted);
+ }
