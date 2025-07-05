@@ -124,45 +124,28 @@
         <p>&copy; 2025 solo-leveling-system. All rights reserved.</p>
     </footer>
 
-    <script type="module">
-        // Import Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-        import {
-            getAuth,
-            createUserWithEmailAndPassword,
-            signInWithPopup,
-            GoogleAuthProvider,
-            updateProfile     // ← add this import
-        } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-
-        // Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyC4C8QQlLGpWpORqCbDuy1xVJGi3JVM-S8",
-            authDomain: "solo-leveling-system-a2c14.firebaseapp.com",
-            projectId: "solo-leveling-system-a2c14",
-            storageBucket: "solo-leveling-system-a2c14.appspot.com",
-            messagingSenderId: "688962214155",
-            appId: "1:688962214155:web:b993ca3c3fb74e05532a0e"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const googleProvider = new GoogleAuthProvider();
-
-        // Elements
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
         const signUpBtn = document.getElementById('signUpBtn');
-        const googleSignInBtn = document.getElementById('googleSignInBtn');
+        const loginBtn = document.getElementById('loginBtn'); // your login button
         const errorMsg = document.getElementById('errorMsg');
 
+        // Common function to handle responses
+        async function handleResponse(res) {
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.msg || data.error || 'Server error');
+            return data;
+        }
+
         // Email & Password Sign Up
-        signUpBtn.addEventListener('click', () => {
-            const email = document.getElementById('email').value;
+        signUpBtn.addEventListener('click', async () => {
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            const username = document.getElementById('username').value;
             errorMsg.textContent = '';
-            if (!email || !password || !confirmPassword || !username) {
+
+            if (!username || !email || !password || !confirmPassword) {
                 errorMsg.textContent = 'All fields are required.';
                 return;
             }
@@ -170,33 +153,49 @@
                 errorMsg.textContent = 'Passwords do not match.';
                 return;
             }
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    // Update profile using modular function
-                    return updateProfile(user, { displayName: username });
-                })
-                .then(() => {
-                    // Redirect to tasks page after profile is set
-                    window.location.href = 'task.html';
-                })
-                .catch((error) => {
-                    errorMsg.textContent = error.message;
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
                 });
+                const { token } = await handleResponse(res);
+                localStorage.setItem('token', token);
+                window.location.href = 'task.html';
+            } catch (err) {
+                errorMsg.textContent = err.message;
+            }
         });
 
-        // Google Sign-In
-        googleSignInBtn.addEventListener('click', () => {
-            signInWithPopup(auth, googleProvider)
-                .then(() => {
-                    // Redirect on success
+        // Email & Password Login
+        if (loginBtn) {
+            loginBtn.addEventListener('click', async () => {
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                errorMsg.textContent = '';
+
+                if (!email || !password) {
+                    errorMsg.textContent = 'Email and password are required.';
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`${API_BASE}/auth/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const { token } = await handleResponse(res);
+                    localStorage.setItem('token', token);
                     window.location.href = 'task.html';
-                })
-                .catch((error) => {
-                    errorMsg.textContent = error.message;
-                });
-        });
+                } catch (err) {
+                    errorMsg.textContent = err.message;
+                }
+            });
+        }
     </script>
+
 
 </body>
 

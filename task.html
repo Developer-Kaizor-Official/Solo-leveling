@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tasks</title>
+    <title>Solo Leveling Tasks</title>
     <link rel="stylesheet" href="CSS files/task.css">
 </head>
 
@@ -23,11 +23,13 @@
         <div class="profile">
             <img src="https://example.com/char.png" alt="Avatar">
             <div>
-                <div>Aakash</div>
-                <div style="font-size: 0.9rem; color: var(--text-muted);">Level 1 Warrior</div>
+                <div id="username">User</div>
+                <div id="userLevel" style="font-size:0.9rem; color: var(--text-muted);">Level 1</div>
             </div>
+            <button id="logoutBtn" class="btn" style="margin-left:1rem;">Logout</button>
         </div>
     </header>
+
     <main>
         <div class="panel">
             <h2>Habits</h2>
@@ -54,9 +56,38 @@
             <button class="btn">Add Reward</button>
         </div>
     </main>
+
     <footer>
         &copy; 2025 Solo Leveling Habits. All rights reserved.
     </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        const token = localStorage.getItem('token');
+        if (!token) window.location.href = 'index.html';
+        const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+
+        async function loadProgress() {
+            try {
+                const res = await fetch(`${API_BASE}/dashboard`, { headers });
+                if (!res.ok) throw new Error(res.status);
+                const data = await res.json();
+                // Update profile level text
+                document.getElementById('userLevel').textContent = `Level ${data.level}`;
+                // Optionally show XP or tasksCompleted somewhere
+            } catch (err) {
+                console.error('Load progress error:', err);
+                if (err.message === '401') localStorage.removeItem('token'), window.location.href = 'index.html';
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+        });
+
+        loadProgress();
+    </script>
 </body>
 
 </html>
